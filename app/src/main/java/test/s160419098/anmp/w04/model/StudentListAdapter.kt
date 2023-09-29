@@ -10,9 +10,9 @@ import androidx.recyclerview.widget.RecyclerView
 import test.s160419098.anmp.w04.R
 import test.s160419098.anmp.w04.view.StudentListFragmentDirections
 
-class StudentAdapter(
+class StudentListAdapter(
     val students: ArrayList<Student>,
-) : RecyclerView.Adapter<StudentAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<StudentListAdapter.ViewHolder>() {
 
     class ViewHolder(
         view: View,
@@ -53,9 +53,9 @@ class StudentAdapter(
         }
     }
 
-    fun updateStudentList(students: ArrayList<Student>) {
+    fun updateData(data: ArrayList<Student>) {
         students.clear()
-        students.addAll(students)
+        students.addAll(data)
         notifyDataSetChanged()
     }
 }
