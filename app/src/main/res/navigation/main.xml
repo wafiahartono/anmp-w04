@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    app:startDestination="@id/studentListFragment">
+    app:startDestination="@id/aircraftListFragment">
 
     <fragment
         android:id="@+id/studentListFragment"
@@ -19,4 +19,9 @@
         android:name="test.s160419098.anmp.w04.view.StudentDetailFragment"
         android:label="fragment_student_detail"
         tools:layout="@layout/fragment_student_detail" />
+    <fragment
+        android:id="@+id/aircraftListFragment"
+        android:name="test.s160419098.anmp.w04.view.AircraftListFragment"
+        android:label="fragment_aircraft_list"
+        tools:layout="@layout/fragment_aircraft_list" />
 </navigation>

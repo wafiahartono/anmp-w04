@@ -9,3 +9,31 @@ data class Student(
     @SerializedName("phone") val phoneNumber: String?,
     @SerializedName("photo_url") val photoUrl: String?,
 )
+
+data class Aircraft(
+    val id: Int?,
+    val name: String?,
+    val type: String?,
+    val country: String?,
+    val manufacturer: String?,
+    @SerializedName("firstFlightDate") val firstFlight: String?,
+    @SerializedName("introducedDate") val introduced: String?,
+    val performance: Performance?,
+    val features: List<String>,
+    val dimension: Dimension?,
+    val imageUrl: String?,
+) {
+    data class Performance(
+        val topSpeed: Int?,
+        val cruiseSpeed: Int?,
+        val range: Int?,
+        val combatRange: Int?,
+        val serviceCeiling: Int?,
+    )
+
+    data class Dimension(
+        val length: Int?,
+        val wingspan: Int?,
+        val height: Int?,
+    )
+}
