@@ -18,7 +18,11 @@
         android:id="@+id/studentDetailFragment"
         android:name="test.s160419098.anmp.w04.view.StudentDetailFragment"
         android:label="fragment_student_detail"
-        tools:layout="@layout/fragment_student_detail" />
+        tools:layout="@layout/fragment_student_detail" >
+        <argument
+            android:name="studentId"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/aircraftListFragment"
         android:name="test.s160419098.anmp.w04.view.AircraftListFragment"

@@ -9,6 +9,7 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.google.android.material.textfield.TextInputEditText
+import com.squareup.picasso.Picasso
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -45,7 +46,11 @@ class StudentDetailFragment : Fragment() {
 
         observeViewModel()
 
-        studentDetailViewModel.fetch()
+        requireArguments().let {
+            studentDetailViewModel.fetch(
+                StudentDetailFragmentArgs.fromBundle(it).studentId
+            )
+        }
     }
 
     private fun observeViewModel() {
@@ -54,6 +59,12 @@ class StudentDetailFragment : Fragment() {
             view?.findViewById<TextInputEditText>(R.id.editTextName)?.setText(student.fullName)
             view?.findViewById<TextInputEditText>(R.id.editTextDateOfBirth)?.setText(student.dateOfBirth)
             view?.findViewById<TextInputEditText>(R.id.editTextPhone)?.setText(student.phoneNumber)
+
+            Picasso.Builder(requireContext())
+                .listener { _, _, exception -> exception.printStackTrace() }
+                .build()
+                .load(student.photoUrl)
+                .into(view?.findViewById(R.id.imageProfile))
         }
     }
 }

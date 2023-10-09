@@ -4,9 +4,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import test.s160419098.anmp.w04.R
 import test.s160419098.anmp.w04.view.StudentListFragmentDirections
 
@@ -20,10 +22,12 @@ class StudentListAdapter(
     ) : RecyclerView.ViewHolder(view) {
         val textID: TextView
         val textFullName: TextView
+        val imagePhoto: ImageView
 
         init {
             textID = view.findViewById(R.id.textID)
             textFullName = view.findViewById(R.id.textFullName)
+            imagePhoto = view.findViewById(R.id.imageProfile)
 
             view.findViewById<Button>(R.id.buttonOpenDetail).setOnClickListener {
                 onButtonOpenDetailClick(adapterPosition)
@@ -36,7 +40,9 @@ class StudentListAdapter(
 
         val onButtonOpenDetailClick: (Int) -> Unit = { studentIndex ->
             Navigation.findNavController(parent).navigate(
-                StudentListFragmentDirections.actionStudentListFragmentToStudentDetailFragment()
+                StudentListFragmentDirections.actionStudentListFragmentToStudentDetailFragment(
+                    students[studentIndex].id!!
+                )
             )
         }
 
@@ -46,10 +52,16 @@ class StudentListAdapter(
     override fun getItemCount() = students.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.apply {
+        with(holder) {
             val student = students[position]
             textID.text = student.id
             textFullName.text = student.fullName
+
+            Picasso.Builder(itemView.context)
+                .listener { _, _, exception -> exception.printStackTrace() }
+                .build()
+                .load(student.photoUrl)
+                .into(imagePhoto)
         }
     }
 
