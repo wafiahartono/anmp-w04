@@ -1,14 +1,20 @@
 package test.s160419098.anmp.w04.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.google.android.material.textfield.TextInputEditText
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.schedulers.Schedulers
 import test.s160419098.anmp.w04.R
 import test.s160419098.anmp.w04.viewmodel.StudentDetailViewModel
+import java.util.concurrent.TimeUnit
 
 class StudentDetailFragment : Fragment() {
     private val studentDetailViewModel: StudentDetailViewModel by viewModels()
@@ -22,6 +28,20 @@ class StudentDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        view.findViewById<Button>(R.id.buttonSaveChanges).setOnClickListener {
+            Observable.timer(1, TimeUnit.SECONDS)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe {
+                    Log.d("Observable", it.toString())
+                    MainActivity.postNotification(
+                        "Changes saved successfully",
+                        "Student data changes saved",
+                        R.drawable.round_save_24,
+                    )
+                }
+        }
 
         observeViewModel()
 
