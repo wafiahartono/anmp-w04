@@ -2,11 +2,16 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("androidx.navigation.safeargs")
+    id("org.jetbrains.kotlin.kapt")
 }
 
 android {
     namespace = "test.s160419098.anmp.w04"
     compileSdk = 34
+
+    dataBinding {
+        enable = true
+    }
 
     defaultConfig {
         applicationId = "test.s160419098.anmp.w04"
